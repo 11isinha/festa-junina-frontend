@@ -15,7 +15,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="./images/logo64 .png">
     <link rel="icon" type="image/png" href="./images/logo64 .png">
     <link rel="shortcut icon" href="./images/logo64 .png" type="image/x-icon">
-    <meta name="msapplication-TileImage" content ="./images/logo64.png">
+    <meta name="msapplication-TileImage" content="./images/logo64.png">
     <meta property="og:image" content="./images/logo64.png">
 
     <!-- Google Font -->
@@ -25,13 +25,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/bark-spears" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/report" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/presley" rel="stylesheet">
-    
-                
+
+
 
     <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
 
     <script>
         tailwind.config = {
@@ -41,7 +42,7 @@
                         midlaner: ['MIDLANER', 'sans-serif'],
                     },
                     colors: {
-                        primary: '#8B1A1A',
+                        primary: '#f4b42c',
                         dark: '#4b2e05'
                     }
                 }
@@ -53,16 +54,26 @@
 
     <!-- animação do botão hamburguer -->
     <style>
-       @import url('https://fonts.cdnfonts.com/css/bark-spears');
-       @import url('https://fonts.cdnfonts.com/css/presley');
+        @import url('https://fonts.cdnfonts.com/css/bark-spears');
+        @import url('https://fonts.cdnfonts.com/css/presley');
+        @import url('https://fonts.cdnfonts.com/css/report');
 
-       P{
-        font-family: 'Presley', sans-serif;
-       }
+        a {
+            font-family: 'Report', sans-serif;
+        }
 
-        h1{
+        P {
+            font-family: 'Presley', sans-serif;
+        }
+
+        h1 {
             font-family: 'Bark Spears', sans-serif;
         }
+
+        h2 {
+            font-family: 'Presley', sans-serif;
+        }
+
         /* Primeira barra gira */
         #btn-mobile.active span:nth-child(1) {
             transform: rotate(45deg) translateY(8px);
@@ -89,6 +100,32 @@
             font-weight: 400;
             font-style: italic;
         }
+
+/* Efeito de papel envelhecido/rústico nos cards */
+.card-caipira {
+    background: #fff;
+    border: 2px solid #f4b42c;
+    border-radius: 15px 50px 15px 50px !important; /* Bordas irregulares charmosas */
+    box-shadow: 5px 5px 0px #f4b42c;
+    transition: all 0.3s ease;
+}
+
+.card-caipira:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0px #8B1A1A;
+    border-color: #8B1A1A;
+}
+
+/* Badge de preço estilo etiqueta de feira */
+.price-tag {
+    background: #8B1A1A;
+    color: white;
+    padding: 2px 12px;
+    border-radius: 20px 0 20px 0;
+    font-weight: bold;
+    display: inline-block;
+}
+        
     </style>
 
 </head>
@@ -98,7 +135,7 @@
 <body class="font-barlow text-[#4b2e05] bg-[#fff8e7]">
 
     <!-- ================= HEADER ================= -->
-  <nav class="bg-[#fff3c4] shadow-md border-b-[6px] border-[#f4b42c]">
+    <nav class="bg-[#fff3c4] shadow-md border-b-[6px] border-[#f4b42c]">
         <div class="max-w-6xl mx-auto px-4">
             <div class="flex justify-between items-center">
 
@@ -110,9 +147,9 @@
 
                 <div class="hidden md:flex items-center space-x-6">
                     <p href="#" class="py-4 px-2 text-[#8B1A1A] border-b-4 border-[#f4b42c] font-semibold">
-                       O mió tempero do arraiá!
+                        O mió tempero do arraiá!
                     </p>
-                   
+
                 </div>
 
                 <!-- Botão Hambúrguer Mobile -->
@@ -167,25 +204,44 @@
 
 
     <!-- BANNER -->
-   <section class="flex flex-col md:flex-row items-center justify-between px-6 md:px-16 py-16 bg-[url('https://www.transparenttextures.com/patterns/wood-pattern.png')] bg-opacity-10">
-            <div class="md:w-1/2 text-center md:text-left">
-                <h1 class="font-titulo text-4xl md:text-6xl mb-6 leading-tight text-accent">
-                   Quem prova uma vez, vira freguês!<br>
-                    <span class="text-primary">A melhor comida do arraiá é a nossa.</span>
-                </h1>
-                <p class="mb-8 text-dark text-xl font-medium">Quem prova uma vez, vira freguês! A melhor comida do arraiá é a nossa.</p>
-                <a href="#cardapio" class="inline-block bg-primary text-white px-10 py-4 rounded-full shadow-[0_5px_0_#9d1d27] hover:translate-y-1 hover:shadow-none transition-all uppercase tracking-wider font-titulo">
-                    ver as delícias
-                </a>
+    <section
+        class="relative flex flex-col md:flex-row items-center justify-between px-6 md:px-16 py-20 bg-[url('https://www.transparenttextures.com/patterns/wood-pattern.png')] bg-[#8B5A2B] overflow-hidden">
+
+        <div class="absolute inset-0 bg-black/10 pointer-events-none"></div>
+
+        <div class="md:w-1/2 text-center md:text-left z-10">
+            <h1 class="font-titulo text-4xl md:text-6xl mb-6 leading-tight text-white drop-shadow-md">
+                Quem prova uma vez, vira freguês!<br>
+                <span class="text-[#FFD700]">Sabor que faz a gente querer arraiá o ano inteiro.</span>
+            </h1>
+            <h2 class="mb-8 text-white/90 text-3xl font-medium">
+                Receitas tradicionais com aquele tempero que todo mundo ama.
+            </h2>
+            <a href="#cardapio"
+                class="inline-block bg-primary text-white px-10 py-4 rounded-full shadow-[0_5px_0_#EE9A49] hover:translate-y-1 hover:shadow-none transition-all uppercase tracking-wider font-titulo">
+                ver as delícias
+            </a>
+        </div>
+
+        <div class="md:w-1/2 mt-16 md:mt-0 relative flex justify-center items-center h-[350px] md:h-[500px] z-10">
+
+            <div
+                class="absolute -translate-x-12 md:-translate-x-16 -translate-y-8 w-44 h-44 md:w-72 md:h-72 rounded-full overflow-hidden shadow-2xl grayscale-[20%]">
+                <img src="./images/banner2.png" class="w-full h-full object-cover" alt="Prato típico">
             </div>
-            <div class="md:w-1/2 mt-10 md:mt-0">
-                <img src="./images/banner.webp" class="w-full max-w-md mx-auto drop-shadow-2xl" alt="Banner">
+
+            <div
+                class="absolute translate-x-8 md:translate-x-10 translate-y-8 w-56 h-56 md:w-85 md:h-85 rounded-full overflow-hidden shadow-[0_25px_50px_rgba(0,0,0,0.5)] z-20">
+                <img src="./images/banner.webp" class="w-full h-full object-cover" alt="Destaque">
             </div>
-        </section>
+
+        </div>
+    </section>
 
 
     <!-- CARDÁPIO -->
-    <section id="cardapio" class="border-t-4 border-dashed border-yellow-600 w-full max-w-[700px] mx-auto mt-24 pt-12 pb-4 px-4 text-center">
+    <section id="cardapio"
+        class="border-t-4 border-dashed border-yellow-600 w-full max-w-[700px] mx-auto mt-24 pt-12 pb-4 px-4 text-center">
         <h1 class="text-4xl font-black mb-6 text-red-800 dm-serif-display-regular"> Cardápio </h1>
 
         <!--Menu Categoria Início-->
@@ -209,9 +265,9 @@
             </div>
         </div>
         <!--produto fim-->
-        </section>
+    </section>
 
-        <script>
+    <script>
         const API_URL = 'https://festa-junina-backend.vercel.app/api';
         const navCategorias = document.getElementById('nav-categorias');
         const listaProdutos = document.getElementById('lista-produtos');
@@ -237,7 +293,7 @@
             navCategorias.innerHTML = '';
             categoriasData.forEach(cat => {
                 const btn = document.createElement('button')
-               btn.className = ` snap-start px-5 py-2 rounded-full font-extrabold text-sm transition-all duration-200 cursor-pointer flex-shrink-0 btn-cat bg-yellow-200 text-red-900 border-2 border-yellow-600 shadow-md hover:scale-105 hover:bg-yellow-300 `;
+                btn.className = ` snap-start px-5 py-2 rounded-full font-extrabold text-sm transition-all duration-200 cursor-pointer flex-shrink-0 btn-cat bg-yellow-200 text-red-900 border-2 border-yellow-600 shadow-md hover:scale-105 hover:bg-yellow-300 `;
                 btn.innerText = cat.nome;
                 btn.onclick = () => selecionarCategoria(cat.id, cat.nome);
                 btn.dataset.id = cat.id;
@@ -280,47 +336,96 @@
             }
         }
 
-        function renderizarProdutos(produtos) {
-            listaProdutos.innerHTML = '';
+     function renderizarProdutos(produtos) {
+    listaProdutos.innerHTML = '';
 
-            if (produtos.length === 0) {
-                listaProdutos.innerHTML = '<p class="col-span-2 text-[#7c2d12] py-10">Nenhum produto nesta categoria.</p>'
-                return;
-            }
+    if (produtos.length === 0) {
+        listaProdutos.innerHTML = `
+            <p class="col-span-2 text-[#7c2d12] py-10 text-center">
+                Nenhum produto nesta categoria.
+            </p>
+        `;
+        return;
+    }
 
-            produtos.forEach(p => {
-                const precoFormatado = p.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-                const imgSource = (p.imagem && p.imagem.startsWith('http'))
-                    ? p.imagem
-                    : `./img/${p.imagem || 'logo.webp'}`;
+    produtos.forEach(p => {
 
-                const card = document.createElement('div');
+        const precoFormatado = p.preco.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        });
 
-                card.className = "bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group";
+        const imgSource = (p.imagem && p.imagem.startsWith('http'))
+            ? p.imagem
+            : `./img/${p.imagem || 'logo.webp'}`;
 
-                card.innerHTML = `
-            <div class="absolute inset-0 z-0 cursor-pointer"
-                onclick="abrirModalDetalhes('${p.nome}', ${p.preco}, '${p.descricao || ''}', '${imgSource}', '${p.id}')">
+        const card = document.createElement('div');
+
+        card.className = `
+            card-caipira
+            p-4
+            relative
+            flex
+            flex-col
+            items-center
+            group
+            overflow-hidden
+            cursor-pointer
+            active:scale-95
+            transition-all
+        `;
+
+        // Clique no card inteiro
+        card.onclick = (e) => {
+
+            // Evita abrir modal ao clicar no botão
+            if (e.target.closest('button')) return;
+
+            abrirModalDetalhes(
+                p.nome,
+                p.preco,
+                p.descricao || '',
+                imgSource,
+                p.id
+            );
+        };
+
+        card.innerHTML = `
+            <div class="w-28 h-28 mb-3 relative z-10 pointer-events-none">
+                
+                <img
+                    src="${imgSource}"
+                    alt="${p.nome}"
+                    class="w-full h-full object-cover rounded-full border-4 border-yellow-100 shadow-md group-hover:rotate-6 transition-transform"
+                    onerror="this.src='./img/logo.webp'"
+                >
+
             </div>
 
-            <img src="${imgSource}" alt="${p.nome}"
-                class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10"
-                onerror="this.src='./img/logo.webp'">
+            <div class="text-center w-full relative z-10 pointer-events-none">
 
-            <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
-                <h4 class="font-bold text-gray-800 text-sm leading-tight">${p.nome}</h4>
-                <p class="text-primary font-bold">${precoFormatado}</p>
+                <h4 class="font-bold text-dark text-lg mb-1 leading-tight">
+                    ${p.nome}
+                </h4>
+
+                <div class="price-tag text-sm">
+                    ${precoFormatado}
+                </div>
+
             </div>
 
-            <button onclick="adicionarItem('${p.id}','${p.nome}', ${p.preco})"
-                class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-700 active:scale-95 transition-all z-10 relative">
-                Adicionar
+            <button
+                onclick="adicionarItem('${p.id}', '${p.nome}', ${p.preco})"
+                class="w-full bg-[#f4b42c] text-white py-2 rounded-lg text-sm font-black mt-4 shadow-sm hover:bg-[#8B1A1A] transition-colors z-20 relative flex justify-center items-center gap-2"
+            >
+                <span>ADICIONAR</span>
+                <span class="text-lg">＋</span>
             </button>
         `;
 
-                listaProdutos.appendChild(card);
-            });
-        }
+        listaProdutos.appendChild(card);
+    });
+}
 
 
         carregarCategorias();
@@ -328,393 +433,414 @@
 
     <!-- FOOTER -->
     <footer class="mt-24 text-center py-12 text-sm text-yellow-100 bg-[#5a2d0c] border-t-4 border-yellow-500">
-       <h3 class="text-lg font-bold mb-2"> Barraca Arraiá do Sabor 🌽🔥 </h3>
-        <p>Avenida Antônio Carlos Comitre - Campolim - 123, Zona Sul - Sorocaba</p>
-        <p>WhatsApp: (15) 98765-4321</p>
-        <p>Aberto todos os dias das 14h às 23h</p>
-    </footer>
+        <h2 class="text-lg text-xl  font-bold mb-2"> Barraca Arraiá do Sabor 🌽🔥 </h2>
+        <div class="text-white/90 space-y-2">
+            <p class="text-lg md:text-xl font-medium">
+                <i class="fas fa-map-marker-alt mr-2 text-yellow-400"></i>
+                Avenida Antônio Carlos Comitre - Campolim - 123, Zona Sul - Sorocaba
+            </p>
+            <p class="text-lg md:text-xl font-bold text-white">
+                <i class="fab fa-whatsapp mr-2 text-green-400"></i>
+                WhatsApp: (15) 98765-4321
+            </p>
+            <p class="text-lg md:text-xl font-medium italic">
+                <i class="far fa-clock mr-2 text-yellow-400"></i>
+                Aberto todos os dias das 14h às 23h
+            </p>
+        </div>
 
-    <!-- BOTÃO WHATSAPP -->
-    <a href="https://wa.me/5515987654321" target="_blank" class="fixed bottom-5 right-5">
-        <img src="./images/whats.png" alt="Link WhatsApp" class="h-[60px]">
-    </a>
+        <!-- BOTÃO WHATSAPP -->
+        <a href="https://wa.me/5515987654321" target="_blank" class="fixed bottom-5 right-5">
+            <img src="./images/whats.png" alt="Link WhatsApp" class="h-[60px]">
+        </a>
 
-    <!-- MODAL DE DETALHES DO PRODUTO -->
-    <div id="detalhes-modal"
-        class="fixed inset-0 bg-black/70 z-[80] flex justify-center items-center opacity-0 pointer-events-none transition-opacity duration-300 px-4">
-       <div class="bg-[#fff8e7] w-full max-w-[400px] rounded-[30px] overflow-hidden border-4 border-yellow-600 transform scale-95 transition-transform duration-300 relative flex flex-col"
-        id="detalhes-modal-content">
-            <!-- Botão Fechar -->
-            <button onclick="fecharModalDetalhes()"
-                class="absolute top-4 right-4 bg-white/80 backdrop-blur-md text-dark w-10 h-10 rounded-full flex justify-center items-center font-bold text-2xl shadow-sm z-10 hover:text-primary active:scale-90 transition-all">&times;</button>
-
-            <!-- Imagem -->
-            <div class="w-full h-[280px] bg-gray-50 flex justify-center items-center p-8 relative">
-                <div class="absolute inset-0 bg-gradient-to-b from-gray-100 to-white opacity-50"></div>
-                <img id="detalhes-img" src="" alt="Produto"
-                    class="w-full h-full object-contain drop-shadow-xl relative z-10 transition-transform duration-500 hover:scale-105">
-            </div>
-
-            <!-- Infos -->
-            <div class="p-6">
-                <h2 id="detalhes-nome" class="text-3xl font-black text-dark mb-1 leading-tight tracking-tight">Nome do
-                    Produto</h2>
-                <p id="detalhes-preco" class="text-2xl font-black text-primary mb-4 drop-shadow-sm">R$ 0,00</p>
-                <div class="bg-gray-50 rounded-xl p-4 mb-6">
-                    <p id="detalhes-desc" class="text-gray-600 text-sm leading-relaxed font-medium">Descrição detalhada
-                        do produto vai aqui...</p>
+        <!-- MODAL DE DETALHES DO PRODUTO -->
+        <div id="detalhes-modal"
+            class="fixed inset-0 bg-black/70 z-[80] flex justify-center items-center opacity-0 pointer-events-none transition-opacity duration-300 px-4">
+            <div class="bg-[#fff8e7] w-full max-w-[400px] rounded-[30px] overflow-hidden border-4 border-yellow-600 transform scale-95 transition-transform duration-300 relative flex flex-col"
+                id="detalhes-modal-content">
+                <!-- Botão Fechar -->
+               <button onclick="fecharModalDetalhes()"
+    class="absolute top-4 right-4 bg-red-600 text-white w-12 h-12 rounded-full flex justify-center items-center shadow-xl z-[100] hover:bg-red-700 active:scale-90 transition-all border-2 border-white">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+</button>
+                <!-- Imagem -->
+                <div class="w-full h-[280px] bg-gray-50 flex justify-center items-center p-8 relative">
+                    <div class="absolute inset-0 bg-gradient-to-b from-gray-100 to-white opacity-50"></div>
+                    <img id="detalhes-img" src="" alt="Produto"
+                        class="w-full h-full object-contain drop-shadow-xl relative z-10 transition-transform duration-500 hover:scale-105">
                 </div>
 
-                <button id="detalhes-btn-add"
-                    class="w-full bg-gradient-to-r from-primary to-[#a82d2f] text-white py-4 rounded-xl text-[17px] font-extrabold shadow-[0_8px_20px_-6px_rgba(202,60,63,0.5)] hover:shadow-[0_8px_25px_-4px_rgba(202,60,63,0.6)] active:scale-[0.98] transition-all outline-none flex justify-center items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
-                        stroke="currentColor" class="w-5 h-5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                    </svg>
-                    Adicionar ao Pedido
-                </button>
-            </div>
-        </div>
-    </div>
+                <!-- Infos -->
+                <div class="p-6">
+                    <h2 id="detalhes-nome" class="text-3xl font-black text-dark mb-1 leading-tight tracking-tight">Nome
+                        do
+                        Produto</h2>
+                    <p id="detalhes-preco" class="text-2xl font-black text-primary mb-4 drop-shadow-sm">R$ 0,00</p>
+                    <div class="bg-gray-50 rounded-xl p-4 mb-6">
+                        <p id="detalhes-desc" class="text-gray-600 text-lg leading-loose font-medium">
+                            Descrição detalhada do produto vai aqui...
+                        </p>
+                    </div>
 
-    <!-- RODAPÉ CARRINHO FIXO (Abre Modal) -->
-    <div id="carrinho-footer"
-        class="fixed bottom-0 left-0 w-full bg-gradient-to-r from-red-800 via-orange-600 to-red-800 text-white p-4 z-50 shadow-[0_-4px_6px_rgba(0,0,0,0.1)] transform translate-y-full transition-transform duration-300 flex justify-between items-center cursor-pointer"
-        onclick="abrirModalCarrinho()">
-        <div>
-            <p class="text-sm font-medium">Resumo do Pedido</p>
-            <p class="text-xl font-bold">Total: <span id="carrinho-total">R$ 0,00</span></p>
-        </div>
-        <button class="bg-white text-primary px-4 py-2 rounded-lg font-bold shadow-md active:scale-95 transition-all">
-            Ver Carrinho
-        </button>
-    </div>
-
-    <!-- MODAL DO CARRINHO (Detalhes) -->
-    <div id="carrinho-modal"
-        class="fixed inset-0 bg-black/60 z-[60] flex flex-col justify-end sm:justify-center items-center opacity-0 pointer-events-none transition-opacity duration-300">
-
-        <!-- Conteúdo do Modal -->
-        <div class="bg-white w-full sm:w-[500px] h-[85vh] sm:h-auto sm:max-h-[85vh] rounded-t-3xl sm:rounded-2xl flex flex-col transform translate-y-full sm:translate-y-0 sm:scale-95 transition-transform duration-300"
-            id="carrinho-modal-content">
-
-            <!-- Cabelho Modal -->
-            <div class="p-5 border-b flex justify-between items-center">
-                <h2 class="text-2xl font-bold text-dark">Seu Carrinho</h2>
-                <button onclick="fecharModalCarrinho()"
-                    class="text-3xl font-bold text-muted hover:text-dark focus:outline-none">&times;</button>
-            </div>
-
-            <!-- Corpo Modal (Itens) -->
-            <div id="carrinho-itens-container" class="p-5 flex-1 overflow-y-auto flex flex-col gap-4">
-                <!-- Itens serão injetados aqui via JS -->
-            </div>
-
-            <!-- Rodapé Modal (Checkout) -->
-            <div class="p-5 border-t bg-gray-50 rounded-b-3xl sm:rounded-b-2xl">
-                <div class="flex justify-between items-center mb-4">
-                    <span class="text-lg font-bold">Total do Pedido:</span>
-                    <span id="modal-carrinho-total" class="text-2xl font-black text-primary">R$ 0,00</span>
+                    <button id="detalhes-btn-add"
+                        class="w-full bg-gradient-to-r from-primary to-[#CD0000] text-white py-4 rounded-xl text-[17px] font-extrabold shadow-[0_8px_20px_-6px_rgba(202,60,63,0.5)] hover:shadow-[0_8px_25px_-4px_rgba(202,60,63,0.6)] active:scale-[0.98] transition-all outline-none flex justify-center items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
+                            stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg>
+                        Adicionar ao Pedido
+                    </button>
                 </div>
-                <button onclick="fecharPedido()" id="btn-fechar-pedido"
-                    class="w-full bg-primary text-white py-3 rounded-xl text-lg font-bold shadow-lg hover:bg-red-700 active:scale-95 transition-all">
-                    Fechar Pedido (Usar GPS)
-                </button>
             </div>
         </div>
 
+        <!-- RODAPÉ CARRINHO FIXO (Abre Modal) -->
+        <div id="carrinho-footer"
+            class="fixed bottom-0 left-0 w-full bg-gradient-to-r from-red-800 via-orange-600 to-red-800 text-white p-4 z-50 shadow-[0_-4px_6px_rgba(0,0,0,0.1)] transform translate-y-full transition-transform duration-300 flex justify-between items-center cursor-pointer"
+            onclick="abrirModalCarrinho()">
+            <div>
+                <p class="text-sm font-medium">Resumo do Pedido</p>
+                <p class="text-xl font-bold">Total: <span id="carrinho-total">R$ 0,00</span></p>
+            </div>
+            <button
+                class="bg-white text-primary px-4 py-2 rounded-lg font-bold shadow-md active:scale-95 transition-all">
+                Ver Carrinho
+            </button>
+        </div>
+
+        <!-- MODAL DO CARRINHO (Detalhes) -->
+        <div id="carrinho-modal"
+            class="fixed inset-0 bg-black/60 z-[60] flex flex-col justify-end sm:justify-center items-center opacity-0 pointer-events-none transition-opacity duration-300">
+
+            <!-- Conteúdo do Modal -->
+            <div class="bg-white w-full sm:w-[500px] h-[85vh] sm:h-auto sm:max-h-[85vh] rounded-t-3xl sm:rounded-2xl flex flex-col transform translate-y-full sm:translate-y-0 sm:scale-95 transition-transform duration-300"
+                id="carrinho-modal-content">
+
+                <!-- Cabelho Modal -->
+               <div class="p-5 border-b flex justify-between items-center bg-white">
+    <h2 class="text-2xl font-bold text-[#4b2e05]">Seu Carrinho</h2>
+    <button onclick="fecharModalCarrinho()" 
+        class="text-4xl font-bold text-red-600 hover:text-red-800 transition-colors focus:outline-none">
+        &times;
+    </button>
+</div>
+                <!-- Corpo Modal (Itens) -->
+                <div id="carrinho-itens-container" class="p-5 flex-1 overflow-y-auto flex flex-col gap-4">
+                    <!-- Itens serão injetados aqui via JS -->
+                </div>
+
+                <!-- Rodapé Modal (Checkout) -->
+                <div class="p-5 border-t bg-white rounded-b-3xl">
+    <div class="flex justify-between items-center mb-4">
+        <span class="text-lg font-bold text-[#4b2e05]">Total do Pedido:</span>
+        <span id="modal-carrinho-total" class="text-2xl font-black text-[#f4b42c]">R$ 0,00</span>
     </div>
+    <button onclick="fecharPedido()" id="btn-fechar-pedido"
+        class="w-full bg-[#f4b42c] text-white py-4 rounded-xl text-lg font-bold shadow-lg active:scale-95 transition-all">
+        Fechar Pedido (Usar GPS)
+    </button>
+</div>
+            </div>
 
-    <!--Script para botão categoria-->
-    <script>
-        const botoes = document.querySelectorAll('.btn-cat'); //varre o documento e seleciona qualquer coisa que tenha a classe btn-cat
-        const conteudos = document.querySelectorAll('.categoria-conteudo') //varre conteúdo e seleciona a categoria conteudo
+        </div>
 
-        function mudarCategoria(cat) {
-            //mostra apenas a categoria selecionada
-            conteudos.forEach(div => {
-                div.id === 'cat-' + cat ? div.classList.remove('hidden') : div.classList.add('hidden');
-            });
+        <!--Script para botão categoria-->
+        <script>
+            const botoes = document.querySelectorAll('.btn-cat'); //varre o documento e seleciona qualquer coisa que tenha a classe btn-cat
+            const conteudos = document.querySelectorAll('.categoria-conteudo') //varre conteúdo e seleciona a categoria conteudo
 
-            //atualiza estilo do botão ativo
-            botoes.forEach(btn => {
-                if (btn.dataset.cat === cat) {
-                    btn.classList.add('bg-primary', 'text-white');
-                    btn.classList.remove('bg-[#ebebeb]', 'text-dark');
-                } else {
-                    btn.classList.remove('bg-primary', 'text-white');
-                    btn.classList.add('bg-[#ebebeb]', 'text-dark');
-                }
-            });
-        }
-        //adiciona eventos a cada botão
-        // botoes.forEach(btn => {
-        //     btn.addEventListener('touchstart', () => {
-        //         btn.classList.add('scale-95');
-        //         mudarCategoria(btn.dataset.cat);
-        //     });
-        //     btn.addEventListener('touchend', () => {
-        //         btn.classList.remove('scale-95');
-        //     });
-        //     btn.addEventListener('click', () => {
-        //         mudarCategoria(btn.dataset.cat);
-        //     });
-        // });
+            function mudarCategoria(cat) {
+                //mostra apenas a categoria selecionada
+                conteudos.forEach(div => {
+                    div.id === 'cat-' + cat ? div.classList.remove('hidden') : div.classList.add('hidden');
+                });
 
-
-
-        //ativar scroll suave para links internos
-        let startX = 0;
-        let startY = 0;
-
-        //evento de cada botão
-        botoes.forEach(btn => {
-            //touchstart é disparado assim que o dedo toca tela
-            btn.addEventListener('touchstart', (e) => {
-                startX = e.touches[0].clientX;
-                startY = e.touches[0].clientY;
-                //aplica class tailwind para efeito de clique
-                btn.classList.add('scale-95', 'opacity-80');
-            });
-            //touchend quando tira o dedo da tla
-            btn.addEventListener('touchend', (e) => {
-                //remove efeito visual
-                btn.classList.remove('scale-95', 'opacity-80');
-                //ultima posção do dedo ante de levantar
-                const endX = e.changedTouches[0].clientX;
-                const endY = e.changedTouches[0].clientY;
-                //calcula distância percorida pelo dedo em pixels
-                const deltaX = Math.abs(endX - startX);
-                const deltaY = Math.abs(endY - startY);
-
-                if (deltaX < 10 && deltaY < 10) {
-                    mudarCategoria(btn.dataset.cat);
-                }
-            });
-            //touchcancel se o celular aparecer uma ligação ou notificação popup
-            btn.addEventListener('touchcancel', () => {
-                btn.classList.remove('sacle-95', 'opacity-80');
-            });
-            //click para usuários desktop
-            btn.addEventListener('click', () => {
-                mudarCategoria(btn.dataset.cat);
-            })
-        });
-        //LÓGICA DO CARRINHO, LOCALSTORAGE E APIS
-        //modal detalhes do produto
-
-        const modalDetalhes = document.getElementById('detalhes-modal');
-        const modalDetalhesContent = document.getElementById('detalhes-modal-content');
-
-        //Abre o Modal com informações do produto clicado
-        function abrirModalDetalhes(nome, preco, desc, img, id) {
-            if (navigator.vibrate) navigator.vibrate(40);
-
-            document.getElementById('detalhes-nome').innerText = nome;
-            document.getElementById('detalhes-preco').innerText = preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-            document.getElementById('detalhes-desc').innerText = desc;
-            document.getElementById('detalhes-img').src = img;
-            document.getElementById('detalhes-btn-add').onclick = function () {
-                adicionarItem(id, nome, preco);
-                fecharModalDetalhes();
-            };
-            modalDetalhes.classList.remove('opacity-0', 'pointer-events-none');
-            setTimeout(() => {
-                modalDetalhesContent.classList.remove('scale-95');
-                modalDetalhesContent.classList.add('sacle-100');
-            }, 10);
-        }
-
-        //fecha modal
-        function fecharModalDetalhes() {
-            modalDetalhesContent.classList.remove('scale-100');
-            modalDetalhesContent.classList.add('scale-95');
-            setTimeout(() => {
-                modalDetalhes.classList.add('opacity-0', 'pointer-events-none');
-            }, 300);
-        }
-
-        //carrinho
-        //array para armazenar itens do carrinho
-        let carrinho = [];
-
-        //elementos do DOM
-        const carrinhoFooter = document.getElementById('carrinho-footer');
-        const carrinhoTotalSpan = document.getElementById('carrinho-total');
-        //elementos do modal
-        const modal = document.getElementById('carrinho-modal');
-        const modalContent = document.getElementById('carrinho-modal-content');
-        const itensContainer = document.getElementById('carrinho-itens-container');
-        const modalTotalSpan = document.getElementById('modal-carrinho-total');
-        //verifica se o carrinho já tem itens salvos no locaalstorage
-        function inicializarCarrinho() {
-            const carrinhoSalvo = localStorage.getItem('haruy_carrinho');
-            if (carrinhoSalvo) {
-                //se existe algo salvo converte de volta para array e atualiza o carrinho
-                carrinho = JSON.parse(carrinhoSalvo);
-                atualizarInterfaceCart();
-            }
-        }
-
-        //adicionar ao carrinho
-        function adicionarItem(id, nome, preco) {
-            if (navigator.vibrate) {
-                navigator.vibrate(200);
-            }
-            const index = carrinho.findIndex(item => item.id === id);
-
-            if (index !== -1) {
-                carrinho[index].quantidade += 1;
-            } else {
-                carrinho.push({
-                    id: id,
-                    nome: nome,
-                    preco: preco,
-                    quantidade: 1
+                //atualiza estilo do botão ativo
+                botoes.forEach(btn => {
+                    if (btn.dataset.cat === cat) {
+                        btn.classList.add('bg-primary', 'text-white');
+                        btn.classList.remove('bg-[#ebebeb]', 'text-dark');
+                    } else {
+                        btn.classList.remove('bg-primary', 'text-white');
+                        btn.classList.add('bg-[#ebebeb]', 'text-dark');
+                    }
                 });
             }
-            atualizarCarrinho();
-        }
+            //adiciona eventos a cada botão
+            // botoes.forEach(btn => {
+            //     btn.addEventListener('touchstart', () => {
+            //         btn.classList.add('scale-95');
+            //         mudarCategoria(btn.dataset.cat);
+            //     });
+            //     btn.addEventListener('touchend', () => {
+            //         btn.classList.remove('scale-95');
+            //     });
+            //     btn.addEventListener('click', () => {
+            //         mudarCategoria(btn.dataset.cat);
+            //     });
+            // });
 
-        //função modal abrir e fechar do carrinho
-        function abrirModalCarrinho() {
-            modal.classList.remove('opacity-0', 'pointer-events-none');
-            setTimeout(() => {
-                modalContent.classList.remove('translate-y-full', 'scale-95');
-            }, 10);
-        }
 
-        function fecharModalCarrinho() {
-            modalContent.classList.add('translate-y-full', 'scale-95');
-            setTimeout(() => {
-                modal.classList.add('opacity-0', 'pointer-events-none');
-            }, 300);
-        }
 
-        //controles dentro do modal do carrinho (aumentar, diminuir, remover itens)
-        //controle de (+ / -) quantidade
-        function aumentarQuantidade(id) {
-            const index = carrinho.findIndex(item => item.id === id);
-            if (index !== -1) {
-                carrinho[index].quantidade += 1;
-                atualizarCarrinho();
-                //efeito vibração para feedback tatil
-                if (navigator.vibrate) navigator.vibrate(50);
-            }
-        }
+            //ativar scroll suave para links internos
+            let startX = 0;
+            let startY = 0;
 
-        function diminuirQuantidade(id) {
-            const index = carrinho.findIndex(item => item.id === id);
-            if (index !== -1) {
-                if (carrinho[index].quantidade > 1) {
-                    carrinho[index].quantidade -= 1;
-                } else {
-                    carrinho.splice(index, 1);
-                    if (carrinho.length === 0) {
-                        fecharModalCarrinho();
+            //evento de cada botão
+            botoes.forEach(btn => {
+                //touchstart é disparado assim que o dedo toca tela
+                btn.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                    startY = e.touches[0].clientY;
+                    //aplica class tailwind para efeito de clique
+                    btn.classList.add('scale-95', 'opacity-80');
+                });
+                //touchend quando tira o dedo da tla
+                btn.addEventListener('touchend', (e) => {
+                    //remove efeito visual
+                    btn.classList.remove('scale-95', 'opacity-80');
+                    //ultima posção do dedo ante de levantar
+                    const endX = e.changedTouches[0].clientX;
+                    const endY = e.changedTouches[0].clientY;
+                    //calcula distância percorida pelo dedo em pixels
+                    const deltaX = Math.abs(endX - startX);
+                    const deltaY = Math.abs(endY - startY);
+
+                    if (deltaX < 10 && deltaY < 10) {
+                        mudarCategoria(btn.dataset.cat);
                     }
+                });
+                //touchcancel se o celular aparecer uma ligação ou notificação popup
+                btn.addEventListener('touchcancel', () => {
+                    btn.classList.remove('sacle-95', 'opacity-80');
+                });
+                //click para usuários desktop
+                btn.addEventListener('click', () => {
+                    mudarCategoria(btn.dataset.cat);
+                })
+            });
+            //LÓGICA DO CARRINHO, LOCALSTORAGE E APIS
+            //modal detalhes do produto
+
+            const modalDetalhes = document.getElementById('detalhes-modal');
+            const modalDetalhesContent = document.getElementById('detalhes-modal-content');
+
+            //Abre o Modal com informações do produto clicado
+            function abrirModalDetalhes(nome, preco, desc, img, id) {
+                if (navigator.vibrate) navigator.vibrate(40);
+
+                document.getElementById('detalhes-nome').innerText = nome;
+                document.getElementById('detalhes-preco').innerText = preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                document.getElementById('detalhes-desc').innerText = desc;
+                document.getElementById('detalhes-img').src = img;
+                document.getElementById('detalhes-btn-add').onclick = function () {
+                    adicionarItem(id, nome, preco);
+                    fecharModalDetalhes();
+                };
+                modalDetalhes.classList.remove('opacity-0', 'pointer-events-none');
+                setTimeout(() => {
+                    modalDetalhesContent.classList.remove('scale-95');
+                    modalDetalhesContent.classList.add('scale-100');
+                }, 10);
+            }
+
+            //fecha modal
+            function fecharModalDetalhes() {
+                modalDetalhesContent.classList.remove('scale-100');
+                modalDetalhesContent.classList.add('scale-95');
+                setTimeout(() => {
+                    modalDetalhes.classList.add('opacity-0', 'pointer-events-none');
+                }, 300);
+            }
+
+            //carrinho
+            //array para armazenar itens do carrinho
+            let carrinho = [];
+
+            //elementos do DOM
+            const carrinhoFooter = document.getElementById('carrinho-footer');
+            const carrinhoTotalSpan = document.getElementById('carrinho-total');
+            //elementos do modal
+            const modal = document.getElementById('carrinho-modal');
+            const modalContent = document.getElementById('carrinho-modal-content');
+            const itensContainer = document.getElementById('carrinho-itens-container');
+            const modalTotalSpan = document.getElementById('modal-carrinho-total');
+            //verifica se o carrinho já tem itens salvos no locaalstorage
+            function inicializarCarrinho() {
+                const carrinhoSalvo = localStorage.getItem('haruy_carrinho');
+                if (carrinhoSalvo) {
+                    //se existe algo salvo converte de volta para array e atualiza o carrinho
+                    carrinho = JSON.parse(carrinhoSalvo);
+                    atualizarInterfaceCart();
+                }
+            }
+
+            //adicionar ao carrinho
+            function adicionarItem(id, nome, preco) {
+                if (navigator.vibrate) {
+                    navigator.vibrate(200);
+                }
+                const index = carrinho.findIndex(item => item.id === id);
+
+                if (index !== -1) {
+                    carrinho[index].quantidade += 1;
+                } else {
+                    carrinho.push({
+                       id: Number(id),
+                        nome: nome,
+                        preco: preco,
+                        quantidade: 1
+                    });
                 }
                 atualizarCarrinho();
-                if (navigator.vibrate) navigator.vibrate(50);
             }
-        }
 
-        //persistência do carrinho no localstorage e atualização da interface
-        function atualizarCarrinho() {
-            localStorage.setItem('haruy_carrinho', JSON.stringify(carrinho));
-            atualizarInterfaceCart();
-        }
-        function atualizarInterfaceCart() {
-            if (carrinho.length === 0) {
-                carrinhoFooter.classList.add('translate-y-full');
-                return;
+            //função modal abrir e fechar do carrinho
+            function abrirModalCarrinho() {
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                setTimeout(() => {
+                    modalContent.classList.remove('translate-y-full', 'scale-95');
+                }, 10);
             }
-            const total = carrinho.reduce((acc, item) =>
-                acc + (item.preco * item.quantidade), 0);
-            const totalFormatado = total.toLocaleString('pt-BR',
-                { style: 'currency', currency: 'BRL' });
-            carrinhoTotalSpan.innerText = totalFormatado;
-            modalTotalSpan.innerText = totalFormatado;
 
-            carrinhoFooter.classList.remove('translate-y-full');
-            renderizarItensModal();
-        }
+            function fecharModalCarrinho() {
+                modalContent.classList.add('translate-y-full', 'scale-95');
+                setTimeout(() => {
+                    modal.classList.add('opacity-0', 'pointer-events-none');
+                }, 300);
+            }
 
-        //função para renderizar os itens do carrinho dentro do modal
-        function renderizarItensModal() {
-            if (!itensContainer) return;
-            itensContainer.innerHTML = '';
-            //para cada item no array, cria um HTML
-            carrinho.forEach(item => {
-                const subTotal = (item.preco * item.quantidade).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-                const precoUnit = item.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-                const divItem = document.createElement('div');
-                divItem.className = "flex justify-between items-center border-b pb-4 mt-2";
+            //controles dentro do modal do carrinho (aumentar, diminuir, remover itens)
+            //controle de (+ / -) quantidade
+           function aumentarQuantidade(id) {
+    const index = carrinho.findIndex(item => String(item.id) === String(id));
+                if (index !== -1) {
+                    carrinho[index].quantidade += 1;
+                    atualizarCarrinho();
+                    //efeito vibração para feedback tatil
+                    if (navigator.vibrate) navigator.vibrate(50);
+                }
+            }
 
-                divItem.innerHTML = `
-            <div class="flex-1">
-                <h4 class="font-bold text-lg text-dark">${item.nome}</h4>
-                <p class="text-sm text-muted">${precoUnit}</p>
-                <p class"text-bold text-primary mt-1">${subTotal}</p>
+           function diminuirQuantidade(id) {
+    const index = carrinho.findIndex(item => String(item.id) === String(id));
+                if (index !== -1) {
+                    if (carrinho[index].quantidade > 1) {
+                        carrinho[index].quantidade -= 1;
+                    } else {
+                        carrinho.splice(index, 1);
+                        if (carrinho.length === 0) {
+                            fecharModalCarrinho();
+                        }
+                    }
+                    atualizarCarrinho();
+                    if (navigator.vibrate) navigator.vibrate(50);
+                }
+            }
+
+            //persistência do carrinho no localstorage e atualização da interface
+            function atualizarCarrinho() {
+                localStorage.setItem('haruy_carrinho', JSON.stringify(carrinho));
+                atualizarInterfaceCart();
+            }
+            function atualizarInterfaceCart() {
+                if (carrinho.length === 0) {
+                    carrinhoFooter.classList.add('translate-y-full');
+                    return;
+                }
+                const total = carrinho.reduce((acc, item) =>
+                    acc + (item.preco * item.quantidade), 0);
+                const totalFormatado = total.toLocaleString('pt-BR',
+                    { style: 'currency', currency: 'BRL' });
+                carrinhoTotalSpan.innerText = totalFormatado;
+                modalTotalSpan.innerText = totalFormatado;
+
+                carrinhoFooter.classList.remove('translate-y-full');
+                renderizarItensModal();
+            }
+
+            //função para renderizar os itens do carrinho dentro do modal
+    function renderizarItensModal() {
+    if (!itensContainer) return;
+    itensContainer.innerHTML = '';
+    
+    carrinho.forEach(item => {
+        const subTotal = (item.preco * item.quantidade).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        const precoUnit = item.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        const divItem = document.createElement('div');
+        
+        divItem.className = "flex justify-between items-center border-b pb-5 mt-4";
+        divItem.innerHTML = `
+            <div class="flex-1 text-left">
+                <h4 class="font-bold text-xl text-[#4b2e05] mb-1">${item.nome}</h4>
+                <p class="text-base text-gray-600">Unitário: ${precoUnit}</p>
+                <p class="font-black text-lg text-[#d97706] mt-1">Subtotal: ${subTotal}</p>
             </div>
 
-            <div class="flex items-center gap-3 bg-gray-100 p-2 rounded-xl">
+            <div class="flex items-center gap-4 bg-gray-100 p-3 rounded-2xl">
                 <button onclick="diminuirQuantidade('${item.id}')"
-                class="w-8 h-8 flex justify-center items-center bg-white rounded-lg font-bold text-xl shadow-sm hover:text-primary active: scale-95 transition-all">-</button>
-                <span class="font-bold text-lg w-4 text-center">${item.quantidade}</span>
-                <button onclick="aumentarQuantidade('${item.id}')" class="w-8 h-8 flex justify-center items-center bg-white rounded-lg font-bold text-xl shadow-sm hover: text-primary active: scale-95 transition-all">+</button>
-            `;
-                itensContainer.appendChild(divItem);
-            })
-        }
-        //fechar pedido  (Geolocalização API - GPS)
-        function fecharPedido() {
-            if (carrinho.length === 0) {
-                const btnPedido = document.getElementById('btn-fechar-pedido');
-                if (!btnPedido) return;
+                    class="w-10 h-10 flex justify-center items-center bg-white rounded-xl font-bold text-2xl shadow-sm text-red-600 active:scale-95 transition-all">-</button>
+                
+                <span class="font-bold text-xl text-[#4b2e05] min-w-[20px] text-center">${item.quantidade}</span>
 
-                const btnOriginalText = btnPedido.innerText;
-                btnPedido.innerText = "Buscando Localização...";
+                <button onclick="aumentarQuantidade('${item.id}')"
+                    class="w-10 h-10 flex justify-center items-center bg-white rounded-xl font-bold text-2xl shadow-sm text-green-600 active:scale-95 transition-all">+</button>
+            </div>
+        `;
+        itensContainer.appendChild(divItem);
+    });
+}
+            //fechar pedido  (Geolocalização API - GPS)
+            function fecharPedido() {
+                if (carrinho.length > 0) {
+                    const btnPedido = document.getElementById('btn-fechar-pedido');
+                    if (!btnPedido) return;
 
-                navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        const lat = posicao.coords.latitude;
-                        const lng = posicao.coords.longitude;
+                    const btnOriginalText = btnPedido.innerText;
+                    btnPedido.innerText = "Buscando Localização...";
 
-                        btnPedido.innerText = btnOriginalText;
+                    navigator.geolocation.getCurrentPosition(
+                        (position) => {
+                           const lat = position.coords.latitude;
+                           const lng = position.coords.longitude;
 
-                        alert(`Pedido Fechado com Sucesso ! \n Sua Localização: ${lat.toFixed(4)}, ${lng.toFixed(4)}\n Os dados do carrinho serão limpos`);
+                            btnPedido.innerText = btnOriginalText;
 
-                        carrinho = [];
-                        fecharModalCarrinho();
-                        atualizarCarrinho();
-                    },
-                    //callback de erro
-                    (erro) => {
-                        btnPedido.innerText = btnOriginalText;
-                        console.error(erro);
-                        alert("Não foi possível obter sua localização.");
-                        carrinho = [];
-                        fecharModalCarrinho();
-                        atualizarCarrinho();
-                    }
-                );
-            } else {
-                alert(`Pedido Fechado com Sucesso!\n(navegador sem suporte GPS)`);
-                carrinho = [];
-                fecharModalCarrinho();
-                atualizarCarrinho();
+                            alert(`Pedido Fechado com Sucesso ! \n Sua Localização: ${lat.toFixed(4)}, ${lng.toFixed(4)}\n Os dados do carrinho serão limpos`);
+
+                            carrinho = [];
+                            fecharModalCarrinho();
+                            atualizarCarrinho();
+                        },
+                        //callback de erro
+                        (erro) => {
+                            btnPedido.innerText = btnOriginalText;
+                            console.error(erro);
+                            alert("Não foi possível obter sua localização.");
+                            carrinho = [];
+                            fecharModalCarrinho();
+                            atualizarCarrinho();
+                        }
+                    );
+                } else {
+                    alert(`Pedido Fechado com Sucesso!\n(navegador sem suporte GPS)`);
+                    carrinho = [];
+                    fecharModalCarrinho();
+                    atualizarCarrinho();
+                }
+                inicializarCarrinho();
             }
-            inicializarCarrinho();
-        }
-        if('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js')
-                .then(reg => console.log('Service Worker Registrado no Porto! 🍝', reg))
-                .catch(err => console.error('Erro ao preparar : ', err));
-            });
-        }
-    </script>
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('./sw.js')
+                        .then(reg => console.log('Service Worker Registrado no Porto! ', reg))
+                        .catch(err => console.error('Erro ao preparar : ', err));
+                });
+            }
+        </script>
 </body>
 
 </html>
