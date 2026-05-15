@@ -133,6 +133,9 @@
 
 
 <body class="font-barlow text-[#4b2e05] bg-[#fff8e7]">
+    <div id="milhas-topo" style="text-align:center; font-weight:bold; margin:10px;">
+    🌽 Grãos: 0
+</div>
 
     <!-- ================= HEADER ================= -->
     <nav class="bg-[#fff3c4] shadow-md border-b-[6px] border-[#f4b42c]">
@@ -538,11 +541,30 @@
         <span class="text-lg font-bold text-[#4b2e05]">Total do Pedido:</span>
         <span id="modal-carrinho-total" class="text-2xl font-black text-[#f4b42c]">R$ 0,00</span>
     </div>
+   <div id="milhas-carrinho" style="
+    margin-bottom:10px;
+    font-weight:bold;
+    color:#8B5A00;
+    font-size:18px;
+">
+    🌽 Grãos: 0
+</div>
+<button onclick="trocarPremio()" style="
+    margin-top:8px;
+    background:#8B5A00;
+    color:white;
+    padding:8px 12px;
+    border-radius:8px;
+">
+    Trocar por Chapéu 🎩 (10 grãos)
+</button>
     <button onclick="fecharPedido()" id="btn-fechar-pedido"
         class="w-full bg-[#f4b42c] text-white py-4 rounded-xl text-lg font-bold shadow-lg active:scale-95 transition-all">
         Fechar Pedido (Usar GPS)
     </button>
+    
 </div>
+
             </div>
 
         </div>
@@ -793,46 +815,123 @@
         itensContainer.appendChild(divItem);
     });
 }
+let graos = 0;
+function atualizarMilhas() {
+   
+    const topo = document.getElementById("milhas-topo");
+    const carrinho = document.getElementById("milhas-carrinho");
+
+    if (topo) {
+        topo.innerText = "🌽 Grãos: " + graos;
+    }
+
+    if (carrinho) {
+        carrinho.innerText = "🌽 Grãos: " + graos;
+    }
+}
             //fechar pedido  (Geolocalização API - GPS)
             function fecharPedido() {
-                if (carrinho.length > 0) {
-                    const btnPedido = document.getElementById('btn-fechar-pedido');
-                    if (!btnPedido) return;
+                graos += 1;
+atualizarMilhas();
+    if (carrinho.length === 0) {
+        alert("Seu carrinho está vazio!");
+        return;
+    }
+    
 
-                    const btnOriginalText = btnPedido.innerText;
-                    btnPedido.innerText = "Buscando Localização...";
+    // 🔢 soma total de itens
+    const totalQuantidade = carrinho.reduce((acc, item) => acc + item.quantidade, 0);
 
-                    navigator.geolocation.getCurrentPosition(
-                        (position) => {
-                           const lat = position.coords.latitude;
-                           const lng = position.coords.longitude;
+    // 🚨 VALIDAÇÃO (REGRA DO PROFESSOR)
+    if (totalQuantidade > 50) {
+        alert("Máximo de 50 produtos (pamonhas) por pedido!");
+        return;
+    }
 
-                            btnPedido.innerText = btnOriginalText;
+    const btnPedido = document.getElementById('btn-fechar-pedido');
+    const textoOriginal = btnPedido.innerText;
+    btnPedido.innerText = "Enviando pedido...";
 
-                            alert(`Pedido Fechado com Sucesso ! \n Sua Localização: ${lat.toFixed(4)}, ${lng.toFixed(4)}\n Os dados do carrinho serão limpos`);
+    navigator.geolocation.getCurrentPosition(
+        (position) => {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
 
-                            carrinho = [];
-                            fecharModalCarrinho();
-                            atualizarCarrinho();
-                        },
-                        //callback de erro
-                        (erro) => {
-                            btnPedido.innerText = btnOriginalText;
-                            console.error(erro);
-                            alert("Não foi possível obter sua localização.");
-                            carrinho = [];
-                            fecharModalCarrinho();
-                            atualizarCarrinho();
-                        }
-                    );
+            // 🚀 ENVIA PRO BACKEND
+            fetch('https://festa-junina-backend.vercel.app/api/pedido', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    itens: carrinho,
+                    totalItens: totalQuantidade,
+                    localizacao: { lat, lng }
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                btnPedido.innerText = textoOriginal;
+
+                if (data.erro) {
+                    alert(data.erro);
                 } else {
-                    alert(`Pedido Fechado com Sucesso!\n(navegador sem suporte GPS)`);
-                    carrinho = [];
-                    fecharModalCarrinho();
-                    atualizarCarrinho();
+                    alert("Pedido enviado com sucesso! 🎉");
                 }
-                inicializarCarrinho();
-            }
+
+                carrinho = [];
+                fecharModalCarrinho();
+                atualizarCarrinho();
+            })
+            .catch(() => {
+                btnPedido.innerText = textoOriginal;
+                alert("Erro ao enviar pedido");
+            });
+        },
+        () => {
+            btnPedido.innerText = textoOriginal;
+            alert("Não foi possível obter localização.");
+        }
+    );
+}
+function trocarPremio() {
+
+    console.log("clicou no botão"); // TESTE
+
+    if (graos >= 10) {
+        graos -= 10;
+        atualizarMilhas();
+
+        console.log("ganhou chapéu"); // TESTE
+
+        mostrarChapeuGrande();
+
+    } else {
+        alert("Você precisa de 10 grãos!");
+    }
+
+}
+
+
+function mostrarChapeuGrande() {
+    const chapeu = document.getElementById("chapeu-grande");
+
+    if (!chapeu) {
+        console.log("chapeu não encontrado");
+        return;
+    }
+
+    // aparece
+    chapeu.style.opacity = "1";
+    chapeu.style.transform = "translate(-50%, -50%) scale(1)";
+
+    // some depois de 4 segundos
+    setTimeout(() => {
+        chapeu.style.opacity = "0";
+        chapeu.style.transform = "translate(-50%, -50%) scale(0)";
+    }, 4000);
+}
+
             if ('serviceWorker' in navigator) {
                 window.addEventListener('load', () => {
                     navigator.serviceWorker.register('./sw.js')
@@ -840,7 +939,39 @@
                         .catch(err => console.error('Erro ao preparar : ', err));
                 });
             }
+            
         </script>
+       <div id="fogueira-mouse" style="
+    position: fixed;
+    font-size: 30px;
+    pointer-events: none;
+    z-index: 9999;
+">
+    🔥
+</div>
+<script>
+const fogueira = document.getElementById("fogueira-mouse");
+
+document.addEventListener("mousemove", (e) => {
+    fogueira.style.left = (e.clientX + 10) + "px";
+    fogueira.style.top = (e.clientY + 10) + "px";
+});
+</script>
+
+<div id="chapeu-grande">🤠</div>
+<style>
+    #chapeu-grande {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    font-size: 150px;
+    z-index: 9999;
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+</style>
+
 </body>
 
 </html>
