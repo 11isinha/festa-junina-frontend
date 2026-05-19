@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Salvatore - Pedidos</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            vinho: '#9E2A2B',
+            verde: '#2F5D3A',
+            creme: '#FFFFFF'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-creme font-sans">
+
+  <!-- HEADER -->
+  <div class="flex items-center justify-between bg-verde text-white px-6 py-4 shadow-lg">
+
+    <div class="flex items-center gap-4">
+      <img src="images/logo2.webp" alt="Salvatore"
+        class="w-16 h-16 rounded-xl shadow-md border-2 border-white">
+
+      <div>
+        <h1 class="text-xl font-bold tracking-wide">Salvatore</h1>
+        <p class="text-sm text-green-200">Italian Food • 1995</p>
+
+        <!-- STATUS -->
+        <div id="status" class="text-sm mt-1 flex items-center gap-2">
+          <span class="w-2 h-2 bg-red-400 rounded-full"></span>
+          Offline
+        </div>
+      </div>
+    </div>
+
+    <div class="flex gap-3">
+
+      <!-- BOTÃO ONLINE/OFFLINE -->
+      <button id="btnStatus"
+        onclick="toggleStatus()"
+        class="bg-white text-verde px-4 py-2 rounded-lg shadow font-semibold">
+        Ficar Online
+      </button>
+
+      <!-- BOTÃO ATUALIZAR -->
+      <button onclick="carregarPedidos()"
+        class="bg-vinho hover:bg-red-800 text-white px-5 py-2 rounded-lg shadow">
+        Atualizar
+      </button>
+
+    </div>
+  </div>
+
+  <!-- CONTEÚDO -->
+  <div class="p-6">
+
+    <div class="flex justify-between items-center mb-4">
+
+      <h2 class="text-2xl font-semibold text-verde">
+        Pedidos Recebidos
+      </h2>
+
+      <span id="contador"
+        class="bg-vinho text-white px-4 py-1 rounded-full text-sm shadow">
+        0 pedidos
+      </span>
+
+    </div>
+
+    <div id="pedidosContainer"
+      class="grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    </div>
+
+  </div>
+
+  <script>
+
+    // =========================================
+    // CONFIG API
+    // =========================================
+
+    const URL_API = "https://backend-salvatore-atualvercel.vercel.app/api/pedidos";
+
+    let estaOnline = false;
+
+    // =========================================
+    // STATUS VISUAL
+    // =========================================
+
+    function atualizarStatusVisual(tipo = "offline") {
+
+      const status = document.getElementById("status");
+      const btn = document.getElementById("btnStatus");
+
+      if (tipo === "online") {
+
+        status.innerHTML = `
+          <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+          Online
+        `;
+
+        btn.innerText = "Ficar Offline";
+        btn.className =
+          "bg-red-500 text-white px-4 py-2 rounded-lg shadow font-semibold";
+
+      }
+
+      else if (tipo === "carregando") {
+
+        status.innerHTML = `
+          <span class="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></span>
+          Atualizando...
+        `;
+
+      }
+
+      else {
+
+        status.innerHTML = `
+          <span class="w-2 h-2 bg-red-400 rounded-full"></span>
+          Offline
+        `;
+
+        btn.innerText = "Ficar Online";
+        btn.className =
+          "bg-white text-verde px-4 py-2 rounded-lg shadow font-semibold";
+      }
+    }
+
+    // =========================================
+    // TOGGLE ONLINE/OFFLINE
+    // =========================================
+
+    function toggleStatus() {
+
+      estaOnline = !estaOnline;
+
+      if (estaOnline) {
+        atualizarStatusVisual("online");
+        carregarPedidos();
+      } else {
+        atualizarStatusVisual("offline");
+      }
+    }
+
+    // =========================================
+    // CARREGAR PEDIDOS
+    // =========================================
+
+    async function carregarPedidos() {
+
+      if (!estaOnline) return;
+
+      const contador = document.getElementById("contador");
+
+      try {
+
+        atualizarStatusVisual("carregando");
+
+        const response = await fetch(URL_API);
+
+        if (!response.ok) {
+          throw new Error("Erro ao buscar pedidos");
+        }
+
+        const pedidos = await response.json();
+
+        renderPedidos(pedidos);
+
+        contador.innerText = `${pedidos.length} pedido(s)`;
+
+        setTimeout(() => {
+          atualizarStatusVisual("online");
+        }, 500);
+
+      }
+
+      catch (error) {
+
+        console.error(error);
+
+        renderErro();
+
+        atualizarStatusVisual("offline");
+      }
+    }
+
+    // =========================================
+    // RENDER PEDIDOS
+    // =========================================
+
+    function renderPedidos(pedidos) {
+
+      const container = document.getElementById("pedidosContainer");
+
+      container.innerHTML = "";
+
+      // SEM PEDIDOS
+      if (!pedidos || pedidos.length === 0) {
+
+        container.innerHTML = `
+          <div class="col-span-full flex flex-col items-center justify-center py-16 opacity-60">
+
+            <div class="text-6xl mb-4">
+              🍝
+            </div>
+
+            <p class="text-2xl font-bold text-verde">
+              Nenhum pedido pendente
+            </p>
+
+            <p class="text-gray-500 mt-2">
+              A cozinha está tranquila no momento.
+            </p>
+
+          </div>
+        `;
+
+        return;
+      }
+
+      // LOOP DOS PEDIDOS
+      pedidos.forEach(pedido => {
+
+        // Tenta converter itens JSON
+        let itens = [];
+
+        try {
+
+          itens = typeof pedido.itens === "string"
+            ? JSON.parse(pedido.itens)
+            : pedido.itens;
+
+        } catch (e) {
+          console.error("Erro ao converter itens:", e);
+        }
+
+        if (!Array.isArray(itens)) itens = [];
+
+        // HTML DOS ITENS
+        let htmlItens = itens.map(item => `
+
+          <li class="flex justify-between border-b border-gray-100 py-2 text-sm">
+
+            <span class="font-semibold text-gray-700">
+              ${item.quantidade || 1}x ${item.nome || "Produto"}
+            </span>
+
+            <span class="text-gray-500">
+              R$ ${(item.preco || 0).toFixed(2)}
+            </span>
+
+          </li>
+
+        `).join("");
+
+        // DATA FORMATADA
+        let dataFormatada = "Sem horário";
+
+        if (pedido.created_at) {
+
+          const dataObj = new Date(pedido.created_at);
+
+          dataFormatada =
+            dataObj.toLocaleTimeString('pt-BR', {
+              hour: '2-digit',
+              minute: '2-digit'
+            })
+            + " - " +
+            dataObj.toLocaleDateString('pt-BR');
+        }
+
+        // CARD
+        const card = document.createElement("div");
+
+        card.className = `
+          bg-white rounded-2xl shadow-lg border-t-4 border-vinho
+          p-5 flex flex-col hover:shadow-2xl transition
+        `;
+
+        card.innerHTML = `
+
+          <!-- TOPO -->
+          <div class="flex justify-between items-start mb-4">
+
+            <div>
+              <h3 class="text-xl font-black text-vinho">
+                Pedido #${pedido.id}
+              </h3>
+
+              <span class="text-xs text-gray-500">
+                ${dataFormatada}
+              </span>
+            </div>
+
+            <span class="bg-yellow-100 text-yellow-800 text-xs font-bold uppercase px-2 py-1 rounded">
+
+              ${pedido.status || "Pendente"}
+
+            </span>
+
+          </div>
+
+          <!-- CLIENTE -->
+          <div class="bg-gray-50 rounded-lg p-3 mb-4 text-sm">
+
+            <p>
+              <strong>Cliente:</strong>
+              ${pedido.cliente_nome || "Não informado"}
+            </p>
+
+            <p class="mt-1">
+              <strong>Endereço:</strong>
+              ${pedido.cliente_endereco || "Não informado"}
+            </p>
+
+          </div>
+
+          <!-- ITENS -->
+          <div class="flex-grow mb-4">
+
+            <h4 class="font-bold text-sm uppercase text-gray-600 mb-2">
+              Itens do Pedido
+            </h4>
+
+            <ul>
+              ${htmlItens}
+            </ul>
+
+          </div>
+
+          <!-- RODAPÉ -->
+          <div class="pt-4 border-t flex justify-between items-center">
+
+            <div>
+
+              <span class="text-xs uppercase text-gray-500 font-bold">
+                Total
+              </span>
+
+              <p class="text-2xl font-black text-verde">
+                R$ ${(pedido.total || 0).toFixed(2)}
+              </p>
+
+            </div>
+
+            <button onclick="concluirPedido(this)"
+              class="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg font-bold transition">
+
+              Pronto ✓
+
+            </button>
+
+          </div>
+
+        `;
+
+        container.appendChild(card);
+
+      });
+    }
+
+    // =========================================
+    // ERRO
+    // =========================================
+
+    function renderErro() {
+
+      const container = document.getElementById("pedidosContainer");
+      const contador = document.getElementById("contador");
+
+      container.innerHTML = `
+
+        <div class="col-span-full flex flex-col items-center justify-center text-center bg-red-100 border border-red-300 text-red-800 p-6 rounded-xl shadow">
+
+          <div class="text-4xl mb-3">
+            ⚠️
+          </div>
+
+          <h3 class="font-bold text-lg">
+            Erro ao carregar pedidos
+          </h3>
+
+          <p class="text-sm mt-1">
+            Verifique a conexão com o servidor.
+          </p>
+
+          <button onclick="carregarPedidos()"
+            class="mt-4 bg-vinho text-white px-4 py-2 rounded-lg shadow">
+
+            Tentar novamente
+
+          </button>
+
+        </div>
+      `;
+
+      contador.innerText = "--";
+    }
+
+    // =========================================
+    // CONCLUIR PEDIDO
+    // =========================================
+
+    function concluirPedido(btn) {
+
+      const card = btn.closest("div.bg-white");
+
+      card.classList.add("opacity-50", "grayscale");
+
+      btn.innerText = "Finalizado";
+
+      btn.classList.remove("bg-green-600");
+      btn.classList.remove("hover:bg-green-700");
+
+      btn.classList.add("bg-gray-400");
+
+      btn.disabled = true;
+    }
+
+    // =========================================
+    // AUTO UPDATE
+    // =========================================
+
+    setInterval(() => {
+
+      if (estaOnline) {
+        carregarPedidos();
+      }
+
+    }, 10000);
+
+    // =========================================
+    // INIT
+    // =========================================
+
+    window.onload = () => {
+      atualizarStatusVisual("offline");
+    };
+
+  </script>
+
+</body>
+</html>
